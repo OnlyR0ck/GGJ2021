@@ -7,12 +7,13 @@ public class HPBarController : MonoBehaviour
 {
     public static Slider _sliderController;
     public static float health = 1;
-    public static float damage = 1;
+    public static float Damage = 1;
     
     // Start is called before the first frame update
 
     void OnEnable()
     {
+        _sliderController = GetComponent<Slider>();
         OreController.oreHit += HitReceived;
     }
 
@@ -22,7 +23,6 @@ public class HPBarController : MonoBehaviour
     }
     void Start()
     {
-        _sliderController = GetComponent<Slider>();
     }
 
     public void Refill()
@@ -32,7 +32,7 @@ public class HPBarController : MonoBehaviour
 
     void HitReceived()
     {
-        _sliderController.value -= damage;
+        _sliderController.value -= Damage;
     }
 
     // Update is called once per frame

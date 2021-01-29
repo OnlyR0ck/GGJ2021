@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _newDamage;
     private readonly Vector3 _startPosition = new Vector3(10, 0);
 
-    
     // Start is called before the first frame update
     void Awake()
     {
@@ -66,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
 
         /*HPBarController.health = _newHealth;*/
-        HPBarController.damage = _newDamage;
+        HPBarController.Damage = _newDamage;
         HPBarController._sliderController.maxValue = _newHealth;
         HPBarController._sliderController.value = _newHealth;
 
