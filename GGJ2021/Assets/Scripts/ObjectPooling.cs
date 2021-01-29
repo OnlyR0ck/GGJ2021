@@ -5,17 +5,11 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public static ObjectPooling SharedInstance;
     public List<GameObject> prefabsToSpawn;
     public GameObject objectToPool;
     public int amountPool;
 
-    private void Awake()
-    {
-        SharedInstance = this;
-    }
 
-    // Start is called before the first frame update
     void Start()
     {
         prefabsToSpawn = new List<GameObject>();

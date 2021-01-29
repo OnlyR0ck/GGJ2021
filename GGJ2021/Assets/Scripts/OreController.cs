@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class OreController : MonoBehaviour
 {
-    public int health = 10;
-    public int scoreToAdd = 10;
-    public int damage = 1;
+    public float health;
+    public float damage;
+    public float score;
+    public delegate void Action();
+
+    public static event Action oreDestroyed;
 
     private GameManager _gameManager;
     private Vector3 _currentPosition;
@@ -16,6 +19,11 @@ public class OreController : MonoBehaviour
     private void OnMouseDown()
     {
         health -= damage;
+        if (health <= 0)
+        {
+            this.gameObject.SetActive(false);
+            oreDestroyed?.Invoke();
+        }
     }
 
     void Start()
@@ -26,12 +34,7 @@ public class OreController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            this.gameObject.SetActive(false);
-            health = 10;
-            _gameManager.requireOreToSpawn = true;
-        }
+        
 
         if (transform.position.x != 0)
         {
