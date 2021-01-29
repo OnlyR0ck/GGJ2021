@@ -11,6 +11,7 @@ public class OreController : MonoBehaviour
     public delegate void Action();
 
     public static event Action oreDestroyed;
+    public static event Action oreHit;
 
     private GameManager _gameManager;
     private Vector3 _currentPosition;
@@ -19,6 +20,8 @@ public class OreController : MonoBehaviour
     private void OnMouseDown()
     {
         health -= damage;
+        oreHit?.Invoke();
+        
         if (health <= 0)
         {
             this.gameObject.SetActive(false);

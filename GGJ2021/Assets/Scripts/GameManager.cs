@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     }
     
     
-
     void LoadGameProgress()
     {
         PlayerPrefs.GetInt("Level", _currentLevel);
@@ -66,6 +65,11 @@ public class GameManager : MonoBehaviour
             SetParams();
         }
 
+        /*HPBarController.health = _newHealth;*/
+        HPBarController.damage = _newDamage;
+        HPBarController._sliderController.maxValue = _newHealth;
+        HPBarController._sliderController.value = _newHealth;
+
         _oreControllerScript.health = _newHealth;
         _oreControllerScript.damage = _newDamage;
         _oreControllerScript.score = _newScore;
@@ -82,9 +86,5 @@ public class GameManager : MonoBehaviour
         _newScore = _newScore + _newScore * Mathf.Exp(_currentLevel / 40) +
                     Mathf.Pow(-1, Random.Range(0, 2)) * _newScore / 10;
         _newDamage = _newDamage * Mathf.Exp(_currentLevel / 20);
-    }
-    void Update()
-    {
-        
     }
 }
