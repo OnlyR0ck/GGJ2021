@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
+
 
 public class GameManager : MonoBehaviour
 {
     private ObjectPooling _pool;
     private OreController _oreControllerScript;
     private GameObject _ore;
+    private float _currentScore;
     [SerializeField] private int _currentLevel = 0;
     [SerializeField] private int _mustKill;
     [SerializeField] private int _currentKills;
@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _newScore;
     [SerializeField] private float _newDamage;
     private readonly Vector3 _startPosition = new Vector3(10, 0);
+    
+    public TextMeshProUGUI lvlText;
+    public TextMeshProUGUI scoreText;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -29,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         if (_currentLevel == 0)
         {
+            _currentScore = 0;
             SetParams();
         }
         ChangeObject();
@@ -53,10 +58,13 @@ public class GameManager : MonoBehaviour
 
     private void ChangeObject()
     {
+        UpdateLvlText();
         _ore = _pool.GetObject();
         _ore.transform.position = _startPosition;
         _oreControllerScript = _ore.GetComponent<OreController>();
         _currentKills++;
+        
+        UpdateScoreText();
         
         if (_currentKills == _mustKill)
         {
@@ -85,5 +93,16 @@ public class GameManager : MonoBehaviour
         _newScore = _newScore + _newScore * Mathf.Exp(_currentLevel / 40) +
                     Mathf.Pow(-1, Random.Range(0, 2)) * _newScore / 10;
         _newDamage = _newDamage * Mathf.Exp(_currentLevel / 20);
+    }
+
+    void UpdateLvlText()
+    {
+        lvlText.text = $"ORE LV {_currentLevel}\n{_currentKills}/{_mustKill}";
+    }
+
+    void UpdateScoreText()
+    {
+        _currentScore += _newScore;
+        scoreText.text = $"Score {_currentScore} ";
     }
 }
