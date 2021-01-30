@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
         _ore.SetActive(true);
     }
     
+    //Меняет здоровье каждое разрушение
     void ChangeOreParams()
     {
         _mustKill = Random.Range(5, 8);
