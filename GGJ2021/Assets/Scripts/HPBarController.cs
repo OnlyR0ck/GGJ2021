@@ -7,7 +7,7 @@ public class HPBarController : MonoBehaviour
 {
     public static Slider _sliderController;
     public static float health = 1;
-    public static float Damage = 1;
+    public static double Damage = 1;
     
     // Start is called before the first frame update
 
@@ -32,7 +32,7 @@ public class HPBarController : MonoBehaviour
 
     void HitReceived()
     {
-        _sliderController.value -= Damage;
+        _sliderController.value -= (float) Damage;
     }
 
     // Update is called once per frame

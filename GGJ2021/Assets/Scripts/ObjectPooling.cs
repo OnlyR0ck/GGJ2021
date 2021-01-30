@@ -22,7 +22,7 @@ public class ObjectPooling : MonoBehaviour
         }
     }
 
-    public GameObject GetObject()
+    public GameObject GetOre()
     {
         for (int i = 0; i < amountPool; i++)
         {
