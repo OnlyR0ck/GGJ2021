@@ -7,8 +7,9 @@ public class CurrentHealthController : MonoBehaviour
 {
     private double _currentHealth;
     private TextMeshProUGUI _currentHealthText;
-    
+
     public delegate void Action();
+
     public static event Action oreDestroyed;
 
     public void SetCurrentHealth(double health)
@@ -16,7 +17,7 @@ public class CurrentHealthController : MonoBehaviour
         _currentHealth = health;
         UpdateCurrentHealthText();
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +35,5 @@ public class CurrentHealthController : MonoBehaviour
         {
             oreDestroyed?.Invoke();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

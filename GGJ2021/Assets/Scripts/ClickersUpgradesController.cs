@@ -6,12 +6,14 @@ using TMPro;
 using Random = UnityEngine.Random;
 
 public class ClickersUpgradesController : MonoBehaviour
+
 {
     [SerializeField] private double _cost;
     [SerializeField] private double _dpsCount = 1;
     [SerializeField] private int _currentClickerLvl = 0;
     private BalanceObjectController _balanceScript;
     private DPSObjectController _dpsScript;
+
     
     public delegate void Action(double dmg);
     public static event Action Upgrade;
@@ -32,6 +34,7 @@ public class ClickersUpgradesController : MonoBehaviour
         _dpsCount = _dpsCount * Mathf.Exp(_currentClickerLvl / 20f);
         _cost = _cost + _cost * Math.Exp(_currentClickerLvl) + Math.Pow(-1, Random.Range(0, 2)) * _cost / 10f;
         Upgrade?.Invoke(_dpsCount);
+
     }
 
     private void ChangeAutoClickerParams()
