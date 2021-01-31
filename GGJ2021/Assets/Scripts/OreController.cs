@@ -22,7 +22,6 @@ public class OreController : MonoBehaviour
         Debug.Log("Clicked\n");
         _currentHealth.ChangeCurrentHealth(gameManagerScript.GetManualDamage());
     }
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.x != 0)

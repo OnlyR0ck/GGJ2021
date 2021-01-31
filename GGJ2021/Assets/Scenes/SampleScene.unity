@@ -203,12 +203,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 978130854}
-        m_MethodName: 
+      - m_Target: {fileID: 978130855}
+        m_MethodName: CloseRebootShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -620,8 +620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 442, y: -147}
-  m_SizeDelta: {x: 32.1, y: 28}
+  m_AnchoredPosition: {x: 435.8, y: -125.79999}
+  m_SizeDelta: {x: 31.850342, y: 17.763515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104338878
 MonoBehaviour:
@@ -1201,7 +1201,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1588,7 +1588,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 898916282}
-        m_MethodName: OnButtonClick
+        m_MethodName: OnDonateButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1769,9 +1769,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 898916277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e93a3b7a4a9ac479edacf04b58ba06, type: 3}
+  m_Script: {fileID: 11500000, guid: f3be176216aca22459acd5a2369c5573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _textGameObject: {fileID: 1891486211}
 --- !u!1 &978130854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 194}
+  m_AnchoredPosition: {x: -2, y: 194}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113325604
@@ -2915,7 +2916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1279328249
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2939,7 +2940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -272, y: -131}
+  m_AnchoredPosition: {x: 261, y: -131}
   m_SizeDelta: {x: 518.9546, y: 483.49384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1279328250
@@ -2950,7 +2951,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279328248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4e2833267b7112f4d9757a92ff9298bb, type: 2}
   m_CullingMode: 0
@@ -3926,7 +3927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000033379, y: 412}
+  m_AnchoredPosition: {x: 20, y: 412}
   m_SizeDelta: {x: 100.03732, y: 21.870079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1753148668
@@ -3967,7 +3968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 256}
+  m_AnchoredPosition: {x: 17, y: 256}
   m_SizeDelta: {x: 150, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753148670
@@ -5073,7 +5074,7 @@ PrefabInstance:
     - target: {fileID: -2544210432018171328, guid: 46d3a595df41c3e4480fd56d1d19c67b,
         type: 3}
       propertyPath: _oldCost
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2544210432018171328, guid: 46d3a595df41c3e4480fd56d1d19c67b,
         type: 3}

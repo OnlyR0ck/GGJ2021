@@ -35,7 +35,10 @@ public class DPSObjectController : MonoBehaviour
     {
         transform.parent.position = -transform.parent.position;
     }
-
+    public double GetDps()
+    {
+        return _dps;
+    }
     public void ChangeDPS(double term)
     {
         _dps += term;

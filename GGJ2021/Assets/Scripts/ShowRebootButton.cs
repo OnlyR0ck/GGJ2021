@@ -13,13 +13,9 @@ public class ShowRebootButton : MonoBehaviour
     {
         _rectTransform = _rebootShop.GetComponent<RectTransform>();
     }
-    // Start is called before the first frame update
     public void OpenRebootShop()
     {
         _rebootShop.SetActive(true);
-        StartCoroutine(MoveForward());
-
-
     }
 
     public void CloseRebootShop()
@@ -27,13 +23,13 @@ public class ShowRebootButton : MonoBehaviour
         _rebootShop.SetActive(false);
     }
 
-    private IEnumerator MoveForward()
-    {
-        while (_rebootShop.transform.position.x < 6.5f)
-        {
-            yield return new WaitForFixedUpdate();
-            _rectTransform.position = new Vector2(_rectTransform.position.x + 0.02f,
-                _rectTransform.position.y);
-        }
-    }
+    //private IEnumerator MoveForward()
+    //{
+    //    while (_rebootShop.transform.position.x < 6.5f)
+    //    {
+    //        yield return new WaitForFixedUpdate();
+    //        _rectTransform.position = new Vector2(_rectTransform.position.x + 0.02f,
+    //            _rectTransform.position.y);
+    //    }
+    //}
 }

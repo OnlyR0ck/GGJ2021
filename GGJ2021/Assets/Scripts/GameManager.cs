@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
         _dictionary = new Dictionary<int, string>();
         _dictionary.Add(0, "");
         _dictionary.Add(1, "K"); _dictionary.Add(2, "M"); _dictionary.Add(3, "T"); _dictionary.Add(4, "QD"); _dictionary.Add(5, "QN");
-        
+        _dictionary.Add(5, "S");
+
     }
     void Start()
     {
