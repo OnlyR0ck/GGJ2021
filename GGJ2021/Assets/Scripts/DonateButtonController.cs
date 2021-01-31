@@ -26,10 +26,13 @@ public class DonateButtonController : MonoBehaviour
     {
          Debug.Log("Clicked!");
          _balanceObject.ChangeBalance(-_balanceObject.GetBalance());
-            _cost -= _balanceObject.GetBalance();
-         _dpsObject.ChangeDPS(_dpsObject.GetDps() * (1 + _procent / 100f));
-         _procent *= 100;
-         _textMesh.text = $"BONUS {game.ConvertBigNumber(_procent)}% Damage";
-         _titleText.text = $"NEED {game.ConvertBigNumber(_cost)}";
+         _cost -= _balanceObject.GetBalance();
+        if (_cost <= 0)
+        {
+            _dpsObject.ChangeDPS(_dpsObject.GetDps() * (1 + _procent / 100f));
+            _procent *= 100;
+            _textMesh.text = $"BONUS {game.ConvertBigNumber(_procent)}% Damage";
+            _titleText.text = $"NEED {game.ConvertBigNumber(_cost)}";
+        }
     }
 }
