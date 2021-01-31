@@ -8,11 +8,12 @@ public class GameManager : MonoBehaviour
 {
     private Dictionary<int, string> _dictionary;
     private ObjectPooling _pool;
-    private OreController _oreControllerScript;
-    private BalanceObjectController _balanceControllerScript;
+    public Sprite[] oreSprites;
     private GameObject _ore;
     private MaxHealthController _maxHealth;
     private CurrentHealthController _currentHealth;
+    private OreController oreControllerScript;
+    private BalanceObjectController _balanceControllerScript;
     [SerializeField] private int _currentLevel = 0;
     private int _mustKill;
     private int _currentKills;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI lvlText;
     private double _newPotassium = 10;
     private double _oldPotassium = 10;
+    [SerializeField] private bool _shopState = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,28 +33,30 @@ public class GameManager : MonoBehaviour
         _dictionary = new Dictionary<int, string>();
         _dictionary.Add(0, "");
         _dictionary.Add(1, "K"); _dictionary.Add(2, "M"); _dictionary.Add(3, "T"); _dictionary.Add(4, "QD"); _dictionary.Add(5, "QN");
-        LoadGameProgress();
-        _newHealth = 10;
-        _manualDamage = 1;
+        
     }
     void Start()
     {
-        _mustKill = Random.Range(5, 8);
+        
         _pool = GameObject.Find("SpawnManager").GetComponent<ObjectPooling>();
         _balanceControllerScript = GameObject.Find("BalanceObject").GetComponent<BalanceObjectController>();
-        OreController.oreDestroyed += OreDestroyed;
-        CurrentHealthController.oreDestroyed += OreDestroyed;
-        ClickersUpgradesController.Upgrade += ChangeManualDamage;
         _maxHealth = GameObject.Find("MaxHealth").GetComponent<MaxHealthController>();
+        _currentHealth = GameObject.Find("CurrentHealth").GetComponent<CurrentHealthController>();
+
+        LoadProgress();
+        
         if (_maxHealth == null)
         {
             Debug.LogError("_maxHealth has no founded");
         }
-        _currentHealth = GameObject.Find("CurrentHealth").GetComponent<CurrentHealthController>();
         if (_currentLevel == 0)
         {
+            _mustKill = Random.Range(5, 8);
             _oldPotassium = 10;
+            _newHealth = 10;
+            _manualDamage = 1;
             ChangeNewOreParams();
+            SetHealthBarParams();
         }
         ChangeOre();
     }
@@ -70,14 +74,13 @@ public class GameManager : MonoBehaviour
         double t = number / temp * 100;
         return $"{(int) t}.{(int)((t - (int)t) * 100)}{_dictionary[i + 1]}";
     }
-    void LoadGameProgress()
-    {
-        PlayerPrefs.GetInt("Level", _currentLevel);
-    }
-
+    
     void OnEnable()
     {
-        
+        OreController.oreDestroyed += OreDestroyed;
+        CurrentHealthController.oreDestroyed += OreDestroyed;
+        ClickersUpgradesController.Upgrade += ChangeManualDamage;
+        ShopController.shopAction += ChangeShopState;
     }
 
     void OnDisable()
@@ -85,6 +88,7 @@ public class GameManager : MonoBehaviour
         OreController.oreDestroyed -= OreDestroyed;
         CurrentHealthController.oreDestroyed -= OreDestroyed;
         ClickersUpgradesController.Upgrade -= ChangeManualDamage;
+        ShopController.shopAction -= ChangeShopState;
     }
 
     private void ChangeOre()
@@ -92,10 +96,14 @@ public class GameManager : MonoBehaviour
         
         _ore = _pool.GetOre();
         _ore.transform.position = _startPosition;
-        _oreControllerScript = _ore.GetComponent<OreController>();
+        oreControllerScript = _ore.GetComponent<OreController>();
+        oreControllerScript._oreSpriteRender.sprite = oreSprites[Random.Range(0, oreSprites.Length)];
         _currentHealth.SetCurrentHealth(_newHealth);
         _maxHealth.MaxHealthSet(_newHealth);
-        _ore.SetActive(true);
+        if (!_shopState)
+        {
+            _ore.SetActive(true);
+        }
     }
     void ChangeOldOreParams()
     {
@@ -132,7 +140,7 @@ public class GameManager : MonoBehaviour
     void SetHealthBarParams()
     {
         /*HPBarController.health = _newHealth;*/
-        HPBarController.Damage = _manualDamage;
+        //HPBarController.Damage = _manualDamage;
         HPBarController._sliderController.maxValue = (float) _newHealth;
         HPBarController._sliderController.value = (float) _newHealth;
     }
@@ -150,10 +158,39 @@ public class GameManager : MonoBehaviour
         SetHealthBarParams();
         _ore.SetActive(false);
         ChangeOre();
+        SaveProgress();
     }
 
     void ExtractPotassium()
     {
         _balanceControllerScript.ChangeBalance(_newPotassium);
+    }
+
+    void ChangeShopState()
+    {
+        _shopState = !_shopState;
+        _ore?.SetActive(!_shopState);
+    }
+
+    void SaveProgress()
+    {
+        PlayerPrefs.SetInt("_mustKill", _mustKill);
+        PlayerPrefs.SetInt("_currentKills", _currentKills);
+        PlayerPrefs.SetString("_oldHealth", _oldHealth.ToString());
+        PlayerPrefs.SetString("_newHealth", _newHealth.ToString());
+        PlayerPrefs.SetString("_manualDamage", _manualDamage.ToString());
+        PlayerPrefs.SetString("_oldPot", _oldPotassium.ToString());
+        PlayerPrefs.SetString("_newPot", _newPotassium.ToString());
+    }
+
+    void LoadProgress()
+    {
+        _mustKill = PlayerPrefs.GetInt("_mustKill", _mustKill);
+        _currentKills = PlayerPrefs.GetInt("_currentKills", _currentKills);
+        _oldHealth = Convert.ToDouble(PlayerPrefs.GetString("_oldHealth", _oldHealth.ToString()));
+        _newHealth = Convert.ToDouble(PlayerPrefs.GetString("_newHealth", _newHealth.ToString()));
+        _manualDamage = Convert.ToDouble(PlayerPrefs.GetString("_manualDamage", _manualDamage.ToString()));
+        _oldPotassium = Convert.ToDouble(PlayerPrefs.GetString("_oldPot", _oldPotassium.ToString()));
+        _newPotassium = Convert.ToDouble(PlayerPrefs.GetString("_newPot", _newPotassium.ToString()));
     }
 }

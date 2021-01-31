@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -19,6 +20,8 @@ public class CurrentHealthController : MonoBehaviour
     {
         _currentHealthText = GetComponent<TextMeshProUGUI>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        LoadProgress();
+        UpdateCurrentHealthText();
     }
     void UpdateCurrentHealthText()
     {
@@ -27,6 +30,8 @@ public class CurrentHealthController : MonoBehaviour
     public void ChangeCurrentHealth(double term)
     {
         _currentHealth -= term;
+        SaveProgress();
+        HPBarController.ChangeHealth(term);
         if (_currentHealth <= 0)
         {
             oreDestroyed?.Invoke();
@@ -35,5 +40,15 @@ public class CurrentHealthController : MonoBehaviour
         { 
             UpdateCurrentHealthText();
         }
+    }
+
+    void SaveProgress()
+    {
+        PlayerPrefs.SetString("_currentHealth", Convert.ToString(_currentHealth));
+    }
+
+    void LoadProgress()
+    {
+        _currentHealth = Convert.ToDouble(PlayerPrefs.GetString("currentHealth", _currentHealth.ToString()));
     }
 }

@@ -6,22 +6,16 @@ using UnityEngine.UI;
 public class HPBarController : MonoBehaviour
 {
     public static Slider _sliderController;
-    public static float health = 1;
-    public static double Damage = 1;
-    
+
     // Start is called before the first frame update
 
     void OnEnable()
     {
         _sliderController = GetComponent<Slider>();
     }
-    void Start()
-    {
 
-    }
-
-    public void Refill()
+    public static void ChangeHealth(double term)
     {
-        _sliderController.maxValue = health;
+        _sliderController.value -= (float) term;
     }
 }

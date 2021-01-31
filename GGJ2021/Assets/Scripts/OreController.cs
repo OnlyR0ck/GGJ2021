@@ -6,6 +6,7 @@ using UnityEngine;
 public class OreController : MonoBehaviour
 {
     private GameManager gameManagerScript;
+    public SpriteRenderer _oreSpriteRender;
     public delegate void Action();
     private CurrentHealthController _currentHealth;
     public static event Action oreDestroyed;
@@ -13,6 +14,7 @@ public class OreController : MonoBehaviour
     {
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         _currentHealth = GameObject.Find("CurrentHealth").GetComponent<CurrentHealthController>();
+        _oreSpriteRender = GetComponent<SpriteRenderer>();
     }
     private Vector3 _currentPosition;
     private void OnMouseDown()
