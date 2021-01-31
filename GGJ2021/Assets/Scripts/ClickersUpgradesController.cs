@@ -9,17 +9,19 @@ public class ClickersUpgradesController : MonoBehaviour
 
 {
     private double _cost;
-    private double _oldCost = 0;
+    [SerializeField] private double _oldCost = 0;
     [SerializeField] private double _oldDpsCount = 1;
     private double _dpsCount = 1;
-    [SerializeField] private int _currentClickerLvl = 0;
+    private int _currentClickerLvl = 0;
     private BalanceObjectController _balanceScript;
     private DPSObjectController _dpsScript;
     private TextMeshProUGUI _textMesh;
     public delegate void Action(double dmg);
+    private GameManager gameManager;
     public static event Action Upgrade;
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _textMesh = GetComponentInChildren<TextMeshProUGUI>();
         UpdateCost(_oldCost);
         _balanceScript = GameObject.Find("BalanceObject").GetComponent<BalanceObjectController>();
@@ -63,6 +65,6 @@ public class ClickersUpgradesController : MonoBehaviour
     }
     private void UpdateCost(double _cost1)
     {
-        _textMesh.text = $"{_cost1 : 0}";
+        _textMesh.text = gameManager.ConvertBigNumber(_cost1);
     }
 }

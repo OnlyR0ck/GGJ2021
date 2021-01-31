@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public string ConvertBigNumber(double number)
     {
         double temp = 100000;
-        if (number < temp)
+        if (number <= temp)
             return $"{number: 0}";
         int i = 0;
         while (temp < number)
@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
             temp *= 1000;
             i++;
         }
-        double t = number / temp * 1000;
-        return $"{(int) t}.{(int) ((t - (int)t) * 100)}{_dictionary[i]}";
+        double t = number / temp * 100;
+        return $"{(int) t}.{(int)((t - (int)t) * 100)}{_dictionary[i + 1]}";
     }
     void LoadGameProgress()
     {
