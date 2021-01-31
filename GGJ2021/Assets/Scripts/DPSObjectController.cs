@@ -6,17 +6,31 @@ using TMPro;
 public class DPSObjectController : MonoBehaviour
 {
     private double _dps;
+    private double _dPFU;
+    private int i = 0;
     private TextMeshProUGUI _dpsText;
-
+    private CurrentHealthController _currentHealth;
+    private GameManager gameManager;
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _currentHealth = GameObject.Find("CurrentHealth").GetComponent<CurrentHealthController>();
+        _dpsText = GetComponent<TextMeshProUGUI>();
+    }
     public void ChangeDPS(double term)
     {
         _dps += term;
-        _dpsText.text = $"{_dps}";
+        _dPFU = _dps / 50f;
+        _dpsText.text = gameManager.ConvertBigNumber(_dps);
     }
-
-    // Start is called before the first frame update
-    void Start()
+    private void FixedUpdate()
     {
-        _dpsText = GetComponent<TextMeshProUGUI>();
+        i++;
+        double temp = i * _dPFU;
+        if (temp >= 1)
+        {
+            _currentHealth.ChangeCurrentHealth(i * _dPFU);
+            i = 0;
+        }
     }
 }

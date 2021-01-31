@@ -24,13 +24,15 @@ public class ObjectPooling : MonoBehaviour
 
     public GameObject GetOre()
     {
-        for (int i = 0; i < amountPool; i++)
-        {
-            if (!prefabsToSpawn[i].gameObject.activeInHierarchy)
-            {
-                return prefabsToSpawn[i];
-            }
-        }
-        return null;
+        return prefabsToSpawn[UnityEngine.Random.Range(0, amountPool)];
+        //for (int i = 0; i < amountPool; i++)
+        //{
+        //    if (!prefabsToSpawn[i].gameObject.activeInHierarchy)
+        //    {
+        //        return prefabsToSpawn[i];
+        //    }
+        //}
+        //Debug.Log("Закончил!");
+        //return null;
     }
 }

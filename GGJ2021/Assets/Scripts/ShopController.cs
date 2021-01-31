@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShopController : MonoBehaviour
 {
-
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
     public void OnShopEnter()
     {
         gameObject.SetActive(true);

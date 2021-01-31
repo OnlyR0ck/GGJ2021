@@ -5,38 +5,21 @@ using UnityEngine;
 
 public class OreController : MonoBehaviour
 {
-    public double health;
-    public double damage;
-    public double score;
+    private GameManager gameManagerScript;
     public delegate void Action();
-
+    private CurrentHealthController _currentHealth;
     public static event Action oreDestroyed;
-    public static event Action oreHit;
-
+    private void Awake()
+    {
+        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _currentHealth = GameObject.Find("CurrentHealth").GetComponent<CurrentHealthController>();
+    }
     private Vector3 _currentPosition;
-
-    private void OnEnable()
-    {
-        ClickersUpgradesController.Upgrade += ChangeManualDamage;
-    }
-
-    private void OnDisable()
-    {
-        ClickersUpgradesController.Upgrade -= ChangeManualDamage;
-    }
-
     private void OnMouseDown()
     {
-        health -= damage;
-        oreHit?.Invoke();
-        
-        if (health <= 0)
-        {
-            this.gameObject.SetActive(false);
-            oreDestroyed?.Invoke();
-        }
+        Debug.Log("Clicked\n");
+        _currentHealth.ChangeCurrentHealth(gameManagerScript.GetManualDamage());
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,10 +29,5 @@ public class OreController : MonoBehaviour
             _currentPosition.x--;
             transform.position = _currentPosition;
         }
-    }
-    
-    private void ChangeManualDamage(double term)
-    {
-        damage += term;
     }
 }

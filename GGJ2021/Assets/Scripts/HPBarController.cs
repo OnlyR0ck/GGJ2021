@@ -14,26 +14,14 @@ public class HPBarController : MonoBehaviour
     void OnEnable()
     {
         _sliderController = GetComponent<Slider>();
-        OreController.oreHit += HitReceived;
-    }
-
-    void OnDisable()
-    {
-        OreController.oreHit -= HitReceived;
     }
     void Start()
     {
+
     }
 
     public void Refill()
     {
         _sliderController.maxValue = health;
     }
-
-    void HitReceived()
-    {
-        _sliderController.value -= (float) Damage;
-    }
-
-    // Update is called once per frame
 }
