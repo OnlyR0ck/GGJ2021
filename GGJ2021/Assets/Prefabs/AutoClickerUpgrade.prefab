@@ -52,9 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5182ed3b37048ed4ea20b5c25ed31171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cost: 0
-  _dpsCount: 1
-  _currentClickerLvl: 0
+  _oldCost: 0
+  _oldDpsCount: 1
 --- !u!1 &6499902550874852487
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +338,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Buy
 --- !u!1 &6499902551973794829
 GameObject:
   m_ObjectHideFlags: 0
